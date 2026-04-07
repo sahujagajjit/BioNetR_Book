@@ -19,9 +19,13 @@ jobs:
 
       - name: Install packages
         run: |
-              Rscript -e 'install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph"))'
-              Rscript -e 'install.packages("BiocManager")'
-              Rscript -e 'BiocManager::install("STRINGdb", ask = FALSE, update = FALSE)'
+              Rscript -e '
+                install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph"));
+                install.packages("BiocManager");
+                BiocManager::install(version = "3.18", ask = FALSE, update = FALSE);
+                BiocManager::install("STRINGdb", ask = FALSE, update = FALSE);
+                library(STRINGdb)
+                '
 
       - name: Build book
         run: Rscript -e 'bookdown::render_book("index.Rmd","bookdown::gitbook")'
