@@ -1,0 +1,42 @@
+# From Data to Networks
+
+## 3.1 Why Network Thinking?
+
+Traditional analysis:
+
+* Focus on individual genes
+
+Network analysis:
+
+* Focus on interactions
+
+---
+
+## 3.2 Building a Network in R
+
+```{r}
+library(igraph)
+
+edges <- data.frame(
+  from=c("TP53","MYC","EGFR"),
+  to=c("MYC","EGFR","MTOR")
+)
+
+g <- graph_from_data_frame(edges)
+plot(g)
+```
+
+---
+
+## 3.3 Adjacency Matrix
+
+```{r}
+as_adjacency_matrix(g)
+```
+
+---
+
+## 📌 Suggested Figures
+
+* Network plot
+* Adjacency matrix

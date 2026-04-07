@@ -1,0 +1,46 @@
+# STRING Database Integration
+
+## 4.1 Introduction
+
+STRING database integrates multiple interaction sources:
+
+* Experimental
+* Computational
+* Literature
+
+---
+
+## 4.2 Mapping Genes
+
+```{r}
+library(STRINGdb)
+
+string_db <- STRINGdb$new(version="11.5", species=9606)
+```
+
+---
+
+## 4.3 Core Network
+
+* Contains only query genes
+
+---
+
+## 4.4 Extended Network
+
+* Includes interacting partners
+
+---
+
+## 4.5 Filtering
+
+```{r}
+score_cutoff <- 700
+```
+
+---
+
+## 📌 Suggested Figures
+
+* STRING interface screenshot
+* Core vs extended network

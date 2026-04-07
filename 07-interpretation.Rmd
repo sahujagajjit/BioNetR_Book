@@ -1,0 +1,23 @@
+# Biological Interpretation
+
+## 7.1 Understanding Results
+
+* Hub genes → key regulators
+* Modules → pathways
+* Bridges → bottlenecks
+
+---
+
+## 7.2 Biological Context
+
+Ask:
+
+* Is gene disease-related?
+* Is it a TF?
+* Does it belong to pathway?
+
+---
+
+## 📌 Suggested Figures
+
+* Modular network

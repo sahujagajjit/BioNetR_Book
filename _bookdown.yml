@@ -1,0 +1,3 @@
+book_filename: "BioNetR_Ignite"
+output_dir: "_book"
+delete_merged_file: true

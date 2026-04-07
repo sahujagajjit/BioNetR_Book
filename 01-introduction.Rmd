@@ -1,0 +1,95 @@
+# Understanding Biological Networks
+
+## 1.1 What is a Network?
+
+A network is a mathematical representation of relationships between entities and is formally defined as:
+
+$$
+G = (V, E)
+$$
+
+Where:
+
+* $V$ represents nodes (vertices)
+* $E$ represents edges (connections)
+
+In biological systems:
+
+* Nodes → genes, proteins, metabolites
+* Edges → interactions (binding, regulation, co-expression)
+
+> **Key Insight**: Biology is not about individual components but their interactions.
+
+---
+
+## 1.2 Types of Biological Networks
+
+### Protein-Protein Interaction (PPI)
+
+* Nodes: Proteins
+* Edges: Physical interactions
+
+### Gene Regulatory Networks (GRN)
+
+* Nodes: Genes, TFs, miRNAs
+* Edges: Regulatory control
+
+### Metabolic Networks
+
+* Nodes: Metabolites
+* Edges: Reactions
+
+### Functional Networks
+
+* Based on Gene Ontology and annotations
+
+---
+
+## 1.3 Complexity in Biological Networks
+
+Biological networks exhibit:
+
+* Dynamic behavior
+* Context dependency
+* Noise and stochasticity
+* Feedback loops
+* Emergent properties
+
+> These features make biological systems highly complex and require computational approaches.
+
+---
+
+## 1.4 Network Metrics
+
+### Degree
+
+Number of connections of a node
+
+### Betweenness
+
+Importance in information flow
+
+### Closeness
+
+Distance to all nodes
+
+### Modularity
+
+Community structure
+
+---
+
+## 1.5 Minimum Dominating Set (MDS)
+
+A Minimum Dominating Set is the smallest subset of nodes such that all nodes are either in the set or adjacent to it.
+
+> Biological relevance: Minimal control set of genes/proteins
+
+---
+
+## 📌 Suggested Figures
+
+* Basic node-edge diagram
+* Directed vs undirected graph
+* Biological network types (Circos / Sankey)
+* MDS illustration

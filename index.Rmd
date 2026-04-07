@@ -1,0 +1,16 @@
+---
+title: "BioNetR Ignite"
+author: "Jagajjit (BNsquare)"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook
+---
+
+# Preface {-}
+
+This book introduces biological network analysis using R.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
