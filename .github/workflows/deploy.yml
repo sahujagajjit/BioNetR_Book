@@ -18,7 +18,10 @@ jobs:
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Install packages
-        run: Rscript -e 'install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph"))'
+        run: |
+              Rscript -e 'install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph"))'
+              Rscript -e 'install.packages("BiocManager")'
+              Rscript -e 'BiocManager::install("STRINGdb", ask = FALSE, update = FALSE)'
 
       - name: Build book
         run: Rscript -e 'bookdown::render_book("index.Rmd","bookdown::gitbook")'
