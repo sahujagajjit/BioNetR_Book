@@ -16,11 +16,20 @@ jobs:
 
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v2
+      
+      - name: Install system libraries
+        run: |
+             sudo apt-get update
+             sudo apt-get install -y \
+             libcurl4-openssl-dev \
+             libssl-dev \
+             libxml2-dev \
+             libpng-dev
 
       - name: Install packages
         run: |
               Rscript -e '
-                install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph"));
+                install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph","curl","png","httr"));
                 install.packages("BiocManager");
                 BiocManager::install("STRINGdb", ask = FALSE, update = FALSE);
                 library(STRINGdb)
@@ -34,3 +43,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_book
+
