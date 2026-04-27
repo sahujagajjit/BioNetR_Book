@@ -1,43 +1,28 @@
-/* ===================== */
-/* REMOVE ENTIRE TOP BAR */
-/* ===================== */
-
-.book-header,
-.book-header * {
+/* Remove GitBook top header */
+.book-header {
   display: none !important;
 }
 
-/* Remove space left by header */
+/* Fix layout after removing header */
 .book.with-summary .book-body {
   top: 0 !important;
 }
 
-/* ===================== */
-/* REMOVE TITLE BLOCK INSIDE PAGE */
-/* ===================== */
-
-.book .book-body .page-wrapper .page-inner section.normal:first-of-type h1,
-.book .book-body .page-wrapper .page-inner section.normal:first-of-type h2,
-.book .book-body .page-wrapper .page-inner section.normal:first-of-type h3,
-.book .book-body .page-wrapper .page-inner section.normal:first-of-type p {
+/* Hide ONLY the Cover heading */
+#cover > h1 {
   display: none !important;
 }
 
-/* ===================== */
-/* HIDE "Cover" TEXT */
-/* ===================== */
-
-h1#cover {
-  display: none !important;
-}
-
-/* ===================== */
-/* CLEAN COVER IMAGE */
-/* ===================== */
-
+/* Clean cover image */
 section.normal:first-of-type img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
   height: auto;
+}
+
+/* Remove spacing */
+section.normal:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }

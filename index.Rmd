@@ -1,10 +1,8 @@
 ---
-title: " "        # ← IMPORTANT (space, not empty)
-author: " "
-date: " "
 site: bookdown::bookdown_site
 output:
-  bookdown::gitbook
+  bookdown::gitbook:
+    css: style.css
 ---
 
 # Cover {-}
