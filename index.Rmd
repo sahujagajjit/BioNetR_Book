@@ -1,16 +1,18 @@
 ---
-title: "BioNetR Ignite"
-author: "Jagajjit (BNsquare)"
-date: "`r Sys.Date()`"
+title: " "        # ← IMPORTANT (space, not empty)
+author: " "
+date: " "
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook
 ---
 
+# Cover {-}
+
+![](img/CoverNet.jpeg){width=100%}
+
+\newpage
+
 # Preface {-}
 
 This book introduces biological network analysis using R.
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```

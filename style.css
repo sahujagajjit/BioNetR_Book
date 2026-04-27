@@ -1,0 +1,43 @@
+/* ===================== */
+/* REMOVE ENTIRE TOP BAR */
+/* ===================== */
+
+.book-header,
+.book-header * {
+  display: none !important;
+}
+
+/* Remove space left by header */
+.book.with-summary .book-body {
+  top: 0 !important;
+}
+
+/* ===================== */
+/* REMOVE TITLE BLOCK INSIDE PAGE */
+/* ===================== */
+
+.book .book-body .page-wrapper .page-inner section.normal:first-of-type h1,
+.book .book-body .page-wrapper .page-inner section.normal:first-of-type h2,
+.book .book-body .page-wrapper .page-inner section.normal:first-of-type h3,
+.book .book-body .page-wrapper .page-inner section.normal:first-of-type p {
+  display: none !important;
+}
+
+/* ===================== */
+/* HIDE "Cover" TEXT */
+/* ===================== */
+
+h1#cover {
+  display: none !important;
+}
+
+/* ===================== */
+/* CLEAN COVER IMAGE */
+/* ===================== */
+
+section.normal:first-of-type img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
