@@ -34,24 +34,16 @@ In biological systems:
 
 ![Various types of biological networks](img/BiolNetTypes.png)
 
-### Protein-Protein Interaction (PPI)
-
-* Nodes: Proteins
-* Edges: Physical interactions
+There are various types of biological networks as shown in the above image. The most widely used biological networks are Gene Regulatory Networks (GRNs) and Protein-Protein Interaction Networks (PPINs).
 
 ### Gene Regulatory Networks (GRN)
 
-* Nodes: Genes, TFs, miRNAs
-* Edges: Regulatory control
+* GRNs are mostly studied to get insight into the regulation of genes. A basic GRN could be a Gene Coexpression Network whereas there could be trans-regulators such as transcription factors and microRNAs regulating the genes. These could be considered broadly as GRNs although these are specialized ones at the analysis level. Though the GRNs are directional networks, most of the times considered as undirected ones when the network shows direct interactions among gene-gene.
 
-### Metabolic Networks
+### Protein-Protein Interaction (PPI)
 
-* Nodes: Metabolites
-* Edges: Reactions
+* PPINs are represented in the form of Proteins as nodes and the interactions/binding/association among them as edges. These are usually studied as these networks could capture cellular processes and functional relationships. The PPINs are derived from experiments + computational predictions. These are also considered as one of the most important foundation for systems-level biology.
 
-### Functional Networks
-
-* Based on Gene Ontology and annotations
 
 ---
 
