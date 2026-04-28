@@ -1,0 +1,266 @@
+# R Programming for Bioinformatics
+
+## Why R?
+
+First of all, R is an open source and widely used programming language. Specifically, R is a powerful language for:
+
+* Statistical analysis
+* Data visualization
+* Bioinformatics workflows
+
+---
+
+## RStudio Environment
+
+This section is just for understanding the installation and purpose:
+* Download R from CRAN: https://cran.r-project.org/
+* Download RStudio from: https://posit.co/download/rstudio-desktop/
+
+Key panels:
+
+* Console: Main command interface
+* Script: For writing and saving code
+* Environment: Shows loaded objects
+* Plots: For viewing generated visualizations
+
+> **Figure Placeholder**: RStudio interface
+
+---
+
+
+## Basic Syntax
+
+```{r}
+# Assigning variables
+GeneExpression <- 5.6
+Species <- "Homo sapiens"
+
+# Numeric vector
+x <- c(1,2,3,4,5)
+
+# Basic operations
+mean(x)
+sum(x)
+length(x)
+```
+
+
+## Working with Biological Data
+
+```{r}
+# Gene expression values
+GeneExpressions <- c(7.2, 8.5, 6.3, 9.0, 7.8)
+
+# Summary statistics
+mean(GeneExpressions)
+median(GeneExpressions)
+sd(GeneExpressions)
+```
+
+
+## Data Structures in R
+
+### Vector
+
+```{r}
+v <- c(1,2,3,4,5)
+v
+```
+
+
+### Matrix
+
+```{r}
+mat <- matrix(1:9, nrow=3, ncol=3)
+mat
+```
+
+
+
+### List
+
+```{r}
+my_list <- list(
+  Gene="TP53",
+  Expression=7.5,
+  Active=TRUE
+)
+my_list
+```
+
+
+
+### Data Frame
+
+```{r}
+df <- data.frame(
+  Gene=c("TP53","BRCA1","EGFR"),
+  Expression=c(7.2, 8.5, 6.3)
+)
+df
+```
+
+
+
+## Importing Data
+
+```{r eval=FALSE}
+# Read CSV file
+data <- read.csv("gene_expression.csv")
+
+# View first few rows
+head(data)
+```
+
+
+## Data Manipulation
+
+```{r}
+# Subsetting
+df$Gene
+df$Expression
+
+# Filtering
+df[df$Expression > 7, ]
+
+# Adding new column
+df$HighExpression <- df$Expression > 7
+df
+```
+
+
+
+## Control Structures
+
+### If-Else
+
+```{r}
+value <- 8
+
+if(value > 7){
+  print("High expression")
+} else {
+  print("Low expression")
+}
+```
+
+
+### Loop
+
+```{r}
+for(i in 1:5){
+  print(i)
+}
+```
+
+---
+
+## Apply Functions
+
+```{r}
+# Using apply
+mat <- matrix(1:9, nrow=3)
+
+apply(mat, 1, sum)  # Row sums
+apply(mat, 2, mean) # Column means
+```
+
+---
+
+## Basic Statistics
+
+```{r}
+# Statistical tests
+t.test(GeneExpressions)
+
+# Correlation
+x <- c(1,2,3,4,5)
+y <- c(2,4,6,8,10)
+cor(x,y)
+```
+
+---
+
+## Visualization
+
+```{r}
+library(ggplot2)
+
+df_plot <- data.frame(
+  Sample=1:5,
+  Expression=GeneExpressions
+)
+
+ggplot(df_plot, aes(x=Sample, y=Expression)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Gene Expression Trend")
+```
+
+---
+
+## Boxplot Visualization
+
+```{r}
+ggplot(df, aes(x=Gene, y=Expression)) +
+  geom_boxplot() +
+  ggtitle("Expression Distribution")
+```
+
+---
+
+## Biological Example: Comparing Gene Expression
+
+```{r}
+control <- c(5.2, 5.5, 5.8, 6.0, 5.6)
+treated <- c(7.1, 7.5, 7.8, 8.0, 7.6)
+
+# Combine into data frame
+exp_data <- data.frame(
+  Expression=c(control, treated),
+  Group=rep(c("Control","Treated"), each=5)
+)
+
+# Statistical comparison
+t.test(Expression ~ Group, data=exp_data)
+```
+
+---
+
+## Visualization of Comparison
+
+```{r}
+ggplot(exp_data, aes(x=Group, y=Expression, fill=Group)) +
+  geom_boxplot() +
+  ggtitle("Control vs Treated Expression")
+```
+
+---
+
+## Saving Output
+
+```{r eval=FALSE}
+# Save data
+write.csv(df, "output.csv", row.names=FALSE)
+
+# Save plot
+ggsave("plot.png")
+```
+
+---
+
+## Summary
+
+In this tutorial, you learned:
+
+* Basic R syntax
+* Data structures (vector, matrix, list, data frame)
+* Data manipulation techniques
+* Statistical analysis
+* Visualization using ggplot2
+* Application in biological data analysis
+
+---
+
+
+

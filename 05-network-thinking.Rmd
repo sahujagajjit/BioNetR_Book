@@ -1,6 +1,6 @@
 # From Data to Networks
 
-## 3.1 Why Network Thinking?
+## Why Network Thinking?
 
 Traditional analysis:
 
@@ -12,7 +12,7 @@ Network analysis:
 
 ---
 
-## 3.2 Building a Network in R
+## Building a Network in R
 
 ```{r}
 library(igraph)
@@ -28,7 +28,7 @@ plot(g)
 
 ---
 
-## 3.3 Adjacency Matrix
+## Adjacency Matrix
 
 ```{r}
 as_adjacency_matrix(g)
@@ -36,7 +36,3 @@ as_adjacency_matrix(g)
 
 ---
 
-## 📌 Suggested Figures
-
-* Network plot
-* Adjacency matrix
