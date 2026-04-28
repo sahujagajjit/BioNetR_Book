@@ -13,4 +13,16 @@ output:
 
 # Preface {-}
 
-This book introduces biological network analysis using R.
+Biology has entered an era where understanding individual components is no longer sufficient to explain the complexity of life. Genes, proteins, and metabolites operate within highly interconnected systems, and it is these interactions that ultimately define cellular function, disease mechanisms, and biological outcomes. Network biology provides a powerful framework to explore this complexity by shifting the focus from isolated entities to relationships and systems.
+
+This book introduces biological network analysis using R, with a focus on clarity, practicality, and reproducibility. Rather than treating network analysis as an abstract concept, the content is designed to guide readers through a hands-on journey—from simple graph structures to real-world biological networks derived from established resources such as STRING. By integrating computational techniques with biological intuition, the book aims to bridge the gap between theory and application.
+
+The motivation behind this work stems from the growing need for accessible, structured learning in bioinformatics. While powerful tools and databases are widely available, many learners face challenges in connecting them into a coherent analytical workflow. This book addresses that gap by presenting a streamlined approach that emphasizes understanding, implementation, and interpretation. The use of R as the primary platform ensures flexibility, transparency, and integration with modern data science practices.
+
+Throughout the chapters, readers will encounter key concepts such as network construction, topological analysis, centrality measures, clustering, and visualization. These are presented not as isolated techniques, but as interconnected steps in a broader analytical pipeline. Wherever possible, examples are grounded in biologically meaningful contexts, enabling readers to appreciate both the computational methods and their scientific relevance.
+
+This book is intended for students, researchers, and professionals in life sciences, bioinformatics, and related fields who seek to incorporate network-based thinking into their work. A basic familiarity with biology and introductory programming in R will be helpful, but the material is structured to remain approachable for beginners while still offering value to more experienced readers.
+
+Looking ahead, the integration of network biology with emerging fields such as multi-omics, machine learning, and systems medicine is poised to transform how we study and interpret biological systems. It is my hope that this book serves as a stepping stone for readers to explore these directions, develop their own analytical workflows, and contribute to the evolving landscape of computational biology.
+
+Ultimately, this book is not just about tools or techniques—it is about developing a way of thinking. A shift from components to connections, from data to insight, and from analysis to understanding.

@@ -1,0 +1,34 @@
+# Conclusion
+
+Biological systems are inherently complex, and networks provide a natural framework to capture this interconnectedness. Instead of viewing genes or proteins in isolation, network-based approaches reveal how interactions collectively drive cellular behavior.
+
+Through this tutorial, we moved from a small list of genes to a rich protein–protein interaction network. Using R and packages such as *igraph* and *STRINGdb*, we were able to construct, expand, visualize, and analyze these networks in a reproducible manner.
+
+Key insights from this workflow include:
+
+* Networks capture **system-level relationships** rather than individual components
+* Centrality measures help identify **important genes such as hubs and bottlenecks**
+* Clustering reveals **functional modules and biological organization**
+* Visualization—both static and interactive—enhances **interpretability and exploration**
+
+Ultimately, integrating biological data with computational tools enables us to transform raw gene lists into meaningful biological knowledge.
+
+---
+
+## Future Directions
+
+The field of network biology continues to evolve rapidly, opening new avenues for research and application:
+
+* **Multi-omics integration**
+  Combining genomics, transcriptomics, proteomics, and metabolomics to build more comprehensive networks
+
+* **AI and network biology**
+  Applying machine learning and graph-based AI models to predict interactions, functions, and disease associations
+
+* **Systems medicine**
+  Leveraging network insights to understand disease mechanisms, identify biomarkers, and design targeted therapies
+
+---
+
+This progression—from data to networks to insight—forms the foundation of modern computational biology.
+

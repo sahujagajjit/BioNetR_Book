@@ -1,37 +1,226 @@
-# From Data to Networks
 
-## Why Network Thinking?
+# From Genes to Networks
 
-Traditional analysis:
+Biological systems are interconnected. Instead of studying genes in isolation, network biology allows us to understand how proteins interact and coordinate cellular processes.
 
-* Focus on individual genes
-
-Network analysis:
-
-* Focus on interactions
+In this tutorial, we begin with a small set of biologically important genes and expand them into a large, meaningful protein–protein interaction (PPI) network using STRING and R.
 
 ---
 
-## Building a Network in R
+## Starting with a Simple Network
 
-```{r}
+Before working with real data, we construct a small example network.
+
+```{r message=FALSE, warning=FALSE}
 library(igraph)
 
 edges <- data.frame(
-  from=c("TP53","MYC","EGFR"),
-  to=c("MYC","EGFR","MTOR")
+  from=c("TP53","MYC","EGFR","BRCA1"),
+  to=c("MYC","EGFR","MTOR","TP53")
 )
 
-g <- graph_from_data_frame(edges)
-plot(g)
+g_simple <- graph_from_data_frame(edges, directed=FALSE)
+
+plot(g_simple,
+     main="A Simple Gene Interaction Network",
+     vertex.size=30,
+     vertex.label.cex=0.8)
+```
+
+This introduces the idea of nodes (genes) and edges (interactions).
+
+---
+
+## Moving to Real Biological Data
+
+We now use the STRING database to construct a biologically meaningful network.
+
+```{r}
+library(STRINGdb)
+
+string_db <- STRINGdb$new(
+  version="11.5",
+  species=9606,
+  score_threshold=200
+)
+```
+
+We begin with a set of important genes:
+
+```{r}
+GeneNames <- c("TP53","MDM2","BRCA1","EGFR","MYC",
+               "AKT1","PIK3CA","CDK1","CDK2","RB1")
+
+genes_df <- data.frame(Gene=GeneNames)
+```
+
+These genes are mapped to STRING identifiers:
+
+```{r}
+mapped <- string_db$map(genes_df,"Gene",removeUnmappedRows=TRUE)
+
+mapped
 ```
 
 ---
 
-## Adjacency Matrix
+## Expanding into a Large Network
+
+A small gene list alone is not enough to produce a rich network. Therefore, we expand it by including interacting partners.
 
 ```{r}
-as_adjacency_matrix(g)
+library(igraph)
+
+hits <- mapped$STRING_id
+
+# First-level neighbors
+neighbors_lvl1 <- string_db$get_neighbors(hits)
+
+# Second-level neighbors (more expansion)
+neighbors_lvl2 <- string_db$get_neighbors(neighbors_lvl1)
+
+# Combine all nodes
+all_nodes <- unique(c(hits, neighbors_lvl1, neighbors_lvl2))
+
+# Sample to keep network manageable but rich
+set.seed(123)
+all_nodes <- sample(all_nodes, min(180, length(all_nodes)))
+
+# Retrieve interactions
+edges <- string_db$get_interactions(all_nodes)
+
+# Relax filtering to ensure dense network
+edges <- edges[edges$combined_score >= 250, ]
+
+# Fallback if too sparse
+if(nrow(edges) < 300){
+  edges <- string_db$get_interactions(all_nodes)
+}
+
+# Build graph
+g <- graph_from_data_frame(edges[,c("from","to")], directed=FALSE)
+g <- simplify(g)
+
+cat("Number of nodes:", vcount(g), "\n")
+cat("Number of edges:", ecount(g), "\n")
+```
+
+This guarantees a sufficiently large and visually meaningful network.
+
+---
+
+## Visualizing the Network
+
+We highlight the original query genes within the expanded network.
+
+```{r}
+V(g)$color <- ifelse(V(g)$name %in% hits, "tomato", "skyblue")
+
+plot(g,
+     main="Expanded STRING Network",
+     vertex.size=5,
+     vertex.label=NA)
+```
+
+---
+
+## Understanding Network Structure
+
+We now quantify the importance of each gene using centrality measures.
+
+```{r}
+degVals <- degree(g)
+betVals <- betweenness(g)
+cloVals <- closeness(g)
+
+centrality_df <- data.frame(
+  Gene=V(g)$name,
+  Degree=degVals,
+  Betweenness=betVals,
+  Closeness=cloVals
+)
+
+head(centrality_df)
+```
+
+#### Interpretation
+
+* **Degree** → identifies hub genes (high connectivity)
+* **Betweenness** → identifies bottlenecks controlling flow
+* **Closeness** → identifies genes with efficient communication
+
+---
+
+## Highlighting Important Genes
+
+We encode importance visually.
+
+```{r}
+V(g)$size <- scales::rescale(degVals, to=c(3,12))
+V(g)$color <- heat.colors(length(degVals))[rank(degVals)]
+
+plot(g,
+     main="Network Highlighting Hub Genes",
+     vertex.label=NA)
+```
+
+Nodes that are larger and warmer in color are more influential.
+
+---
+
+## Detecting Functional Modules
+
+Biological networks often contain clusters corresponding to functional groups.
+
+```{r}
+clusters <- cluster_louvain(g)
+
+V(g)$color <- clusters$membership
+
+plot(g,
+     main="Network Communities",
+     vertex.size=5,
+     vertex.label=NA)
+```
+
+---
+
+## Interactive Network Exploration
+
+Finally, we create an interactive network for deeper exploration.
+
+```{r}
+library(visNetwork)
+
+nodes <- data.frame(
+  id = V(g)$name,
+  label = V(g)$name,
+  group = clusters$membership,
+  value = degVals
+)
+
+edges_df <- as.data.frame(get.edgelist(g))
+colnames(edges_df) <- c("from","to")
+
+visNetwork(nodes, edges_df) %>%
+  visNodes(scaling=list(min=5, max=30)) %>%
+  visEdges(smooth=FALSE) %>%
+  visOptions(highlightNearest=TRUE,
+             nodesIdSelection=TRUE) %>%
+  visLayout(randomSeed=42)
+```
+
+---
+
+## Identifying Hub Genes
+
+We identify the most connected genes in the network.
+
+```{r}
+hubGenes <- V(g)$name[degVals > quantile(degVals, 0.75)]
+
+cat("Hub Genes Identified:\n")
+print(hubGenes)
 ```
 
 ---
