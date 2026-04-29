@@ -1,15 +1,16 @@
 # Conclusion
 
-Biological systems are inherently complex, and networks provide a natural framework to capture this interconnectedness. Instead of viewing genes or proteins in isolation, network-based approaches reveal how interactions collectively drive cellular behavior.
+Biological systems are complex by nature, and networks represent an ideal method for representing this complexity. Rather than focusing on individual genes or proteins, networks highlight the role of interactions as a whole in controlling cell functions.
 
-Through this tutorial, we moved from a small list of genes to a rich protein–protein interaction network. Using R and packages such as *igraph* and *STRINGdb*, we were able to construct, expand, visualize, and analyze these networks in a reproducible manner.
+From the tutorial covered, we have gone from a simple list of genes to constructing, visualizing, and analyzing protein-protein interaction networks. With R programming language and libraries such as *igraph* and *STRINGdb*, it becomes easy to achieve this purpose.
 
-Key insights from this workflow include:
+The key learnings from the tutorial include the following:
 
-* Networks capture **system-level relationships** rather than individual components
-* Centrality measures help identify **important genes such as hubs and bottlenecks**
-* Clustering reveals **functional modules and biological organization**
-* Visualization—both static and interactive—enhances **interpretability and exploration**
+* Networks represent system-level interactions and not component level interactions
+* Centrality analysis can be used to find crucial genes such as hubs and bottlenecks
+* Network clustering helps in understanding modular structure and biological function
+* Network visualization both static and dynamic increases interpretability and exploration
+
 
 Ultimately, integrating biological data with computational tools enables us to transform raw gene lists into meaningful biological knowledge.
 

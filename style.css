@@ -26,3 +26,37 @@ section.normal:first-of-type {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
+
+/* ========================= */
+/* Justified Text Alignment  */
+/* ========================= */
+
+/* Main content text */
+.book .book-body .page-wrapper .page-inner section.normal {
+  text-align: justify;
+}
+
+/* Paragraphs */
+.book .book-body .page-wrapper .page-inner section.normal p {
+  text-align: justify;
+}
+
+/* Lists */
+.book .book-body .page-wrapper .page-inner section.normal li {
+  text-align: justify;
+}
+
+/* Blockquotes (if used) */
+.book .book-body .page-wrapper .page-inner section.normal blockquote {
+  text-align: justify;
+}
+
+/* Prevent code blocks from stretching */
+pre, code {
+  text-align: left !important;
+}
+
+/* Optional: better readability with spacing */
+.book .book-body .page-wrapper .page-inner section.normal p {
+  line-height: 1.7;
+}
