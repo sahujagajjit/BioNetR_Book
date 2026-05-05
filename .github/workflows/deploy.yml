@@ -32,7 +32,6 @@ jobs:
                 install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph","curl","png","httr"));
                 install.packages("BiocManager");
                 BiocManager::install("STRINGdb", ask = FALSE, update = FALSE);
-                library(STRINGdb)
                 '
 
       - name: Build book
