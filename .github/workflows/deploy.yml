@@ -30,7 +30,7 @@ jobs:
       - name: Install packages
         run: |
               Rscript -e '
-                install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph","curl","png","httr"));
+                install.packages(c("bookdown","rmarkdown","knitr","ggplot2","igraph","curl","png","httr","visNetwork"));
                 install.packages("BiocManager");
                 BiocManager::install("STRINGdb", ask = FALSE, update = FALSE);
                 '
