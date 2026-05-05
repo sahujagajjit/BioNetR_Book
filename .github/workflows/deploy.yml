@@ -24,7 +24,8 @@ jobs:
              libcurl4-openssl-dev \
              libssl-dev \
              libxml2-dev \
-             libpng-dev
+             libpng-dev  \
+             libglpk-dev
 
       - name: Install packages
         run: |
