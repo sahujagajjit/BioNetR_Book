@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 From Genes to Networks | BioNetR_Ignite.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 From Genes to Networks | BioNetR_Ignite.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 From Genes to Networks | BioNetR_Ignite.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-programming-for-bioinformatics.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
+<script src="libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Cover</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html"><i class="fa fa-check"></i><b>1</b> Understanding Biological Networks</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#what-is-a-network"><i class="fa fa-check"></i><b>1.1</b> What is a Network?</a></li>
+<li class="chapter" data-level="1.2" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#biological-networks"><i class="fa fa-check"></i><b>1.2</b> Biological Networks</a></li>
+<li class="chapter" data-level="1.3" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#types-of-biological-networks"><i class="fa fa-check"></i><b>1.3</b> Types of Biological Networks</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#gene-regulatory-networks-grn"><i class="fa fa-check"></i><b>1.3.1</b> Gene Regulatory Networks (GRN)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#protein-protein-interaction-ppi"><i class="fa fa-check"></i><b>1.3.2</b> Protein-Protein Interaction (PPI)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#complexity-in-biological-networks"><i class="fa fa-check"></i><b>1.4</b> Complexity in Biological Networks</a></li>
+<li class="chapter" data-level="1.5" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#suggested-figures"><i class="fa fa-check"></i><b>1.5</b> 📌 Suggested Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html"><i class="fa fa-check"></i><b>2</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#mathematical-representation-of-graph-network"><i class="fa fa-check"></i><b>2.1</b> Mathematical Representation of Graph (Network)</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#history-of-graph-theory"><i class="fa fa-check"></i><b>2.2</b> History of Graph Theory</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#from-puzzle-to-principle"><i class="fa fa-check"></i><b>2.2.1</b> From Puzzle to Principle</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#from-bridges-to-biology"><i class="fa fa-check"></i><b>2.3</b> From Bridges to Biology</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#take-home-message"><i class="fa fa-check"></i><b>2.4</b> Take-Home Message</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#types-of-networks"><i class="fa fa-check"></i><b>2.5</b> Types of Networks</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#mathematical-representation-of-networks"><i class="fa fa-check"></i><b>2.6</b> Mathematical representation of networks</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#network-metrics"><i class="fa fa-check"></i><b>2.7</b> Network Metrics</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#degree"><i class="fa fa-check"></i><b>2.7.1</b> Degree</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#betweenness"><i class="fa fa-check"></i><b>2.7.2</b> Betweenness</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#closeness"><i class="fa fa-check"></i><b>2.7.3</b> Closeness</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#minimum-dominating-set-mds"><i class="fa fa-check"></i><b>2.8</b> Minimum Dominating Set (MDS)</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#suggested-figures-1"><i class="fa fa-check"></i><b>2.9</b> 📌 Suggested Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html"><i class="fa fa-check"></i><b>3</b> Analyzing Biological Networks</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#bioinformatics-resources"><i class="fa fa-check"></i><b>3.1</b> Bioinformatics Resources</a></li>
+<li class="chapter" data-level="3.2" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#string-database"><i class="fa fa-check"></i><b>3.2</b> STRING Database</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#key-features"><i class="fa fa-check"></i><b>3.2.1</b> Key Features</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#example-ppi-network-analysis-tp53"><i class="fa fa-check"></i><b>3.3</b> Example: PPI Network Analysis (TP53)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#step-1-network-construction"><i class="fa fa-check"></i><b>3.3.1</b> Step 1: Network Construction</a></li>
+<li class="chapter" data-level="3.3.2" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#step-2-increase-network-connectivity"><i class="fa fa-check"></i><b>3.3.2</b> Step 2: Increase Network Connectivity</a></li>
+<li class="chapter" data-level="3.3.3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#infographic-1-string-workflow"><i class="fa fa-check"></i><b>3.3.3</b> Infographic 1: STRING Workflow</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#summary"><i class="fa fa-check"></i><b>3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html"><i class="fa fa-check"></i><b>4</b> R Programming for Bioinformatics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#why-r"><i class="fa fa-check"></i><b>4.1</b> Why R?</a></li>
+<li class="chapter" data-level="4.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#rstudio-environment"><i class="fa fa-check"></i><b>4.2</b> RStudio Environment</a></li>
+<li class="chapter" data-level="4.3" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#basic-syntax"><i class="fa fa-check"></i><b>4.3</b> Basic Syntax</a></li>
+<li class="chapter" data-level="4.4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#working-with-biological-data"><i class="fa fa-check"></i><b>4.4</b> Working with Biological Data</a></li>
+<li class="chapter" data-level="4.5" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-structures-in-r"><i class="fa fa-check"></i><b>4.5</b> Data Structures in R</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#vector"><i class="fa fa-check"></i><b>4.5.1</b> Vector</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#matrix"><i class="fa fa-check"></i><b>4.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="4.5.3" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#list"><i class="fa fa-check"></i><b>4.5.3</b> List</a></li>
+<li class="chapter" data-level="4.5.4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-frame"><i class="fa fa-check"></i><b>4.5.4</b> Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#importing-data"><i class="fa fa-check"></i><b>4.6</b> Importing Data</a></li>
+<li class="chapter" data-level="4.7" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-manipulation"><i class="fa fa-check"></i><b>4.7</b> Data Manipulation</a></li>
+<li class="chapter" data-level="4.8" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#control-structures"><i class="fa fa-check"></i><b>4.8</b> Control Structures</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#if-else"><i class="fa fa-check"></i><b>4.8.1</b> If-Else</a></li>
+<li class="chapter" data-level="4.8.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#loop"><i class="fa fa-check"></i><b>4.8.2</b> Loop</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#apply-functions"><i class="fa fa-check"></i><b>4.9</b> Apply Functions</a></li>
+<li class="chapter" data-level="4.10" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#basic-statistics"><i class="fa fa-check"></i><b>4.10</b> Basic Statistics</a></li>
+<li class="chapter" data-level="4.11" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#visualization"><i class="fa fa-check"></i><b>4.11</b> Visualization</a></li>
+<li class="chapter" data-level="4.12" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#boxplot-visualization"><i class="fa fa-check"></i><b>4.12</b> Boxplot Visualization</a></li>
+<li class="chapter" data-level="4.13" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#biological-example-comparing-gene-expression"><i class="fa fa-check"></i><b>4.13</b> Biological Example: Comparing Gene Expression</a></li>
+<li class="chapter" data-level="4.14" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#visualization-of-comparison"><i class="fa fa-check"></i><b>4.14</b> Visualization of Comparison</a></li>
+<li class="chapter" data-level="4.15" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#saving-output"><i class="fa fa-check"></i><b>4.15</b> Saving Output</a></li>
+<li class="chapter" data-level="4.16" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#summary-1"><i class="fa fa-check"></i><b>4.16</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html"><i class="fa fa-check"></i><b>5</b> From Genes to Networks</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#starting-with-a-simple-network"><i class="fa fa-check"></i><b>5.1</b> Starting with a Simple Network</a></li>
+<li class="chapter" data-level="5.2" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#moving-to-real-biological-data"><i class="fa fa-check"></i><b>5.2</b> Moving to Real Biological Data</a></li>
+<li class="chapter" data-level="5.3" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#expanding-into-a-large-network"><i class="fa fa-check"></i><b>5.3</b> Expanding into a Large Network</a></li>
+<li class="chapter" data-level="5.4" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#visualizing-the-network"><i class="fa fa-check"></i><b>5.4</b> Visualizing the Network</a></li>
+<li class="chapter" data-level="5.5" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#understanding-network-structure"><i class="fa fa-check"></i><b>5.5</b> Understanding Network Structure</a></li>
+<li class="chapter" data-level="5.6" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#highlighting-important-genes"><i class="fa fa-check"></i><b>5.6</b> Highlighting Important Genes</a></li>
+<li class="chapter" data-level="5.7" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#detecting-functional-modules"><i class="fa fa-check"></i><b>5.7</b> Detecting Functional Modules</a></li>
+<li class="chapter" data-level="5.8" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#interactive-network-exploration"><i class="fa fa-check"></i><b>5.8</b> Interactive Network Exploration</a></li>
+<li class="chapter" data-level="5.9" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#identifying-hub-genes"><i class="fa fa-check"></i><b>5.9</b> Identifying Hub Genes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#future-directions"><i class="fa fa-check"></i><b>6.1</b> Future Directions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="from-genes-to-networks" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> From Genes to Networks<a href="from-genes-to-networks.html#from-genes-to-networks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Biological systems are interconnected. Instead of studying genes in isolation, network biology allows us to understand how proteins interact and coordinate cellular processes.</p>
+<p>In this tutorial, we begin with a small set of biologically important genes and expand them into a large, meaningful protein–protein interaction (PPI) network using STRING and R.</p>
+<hr />
+<div id="starting-with-a-simple-network" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Starting with a Simple Network<a href="from-genes-to-networks.html#starting-with-a-simple-network" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before working with real data, we construct a small example network.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="from-genes-to-networks.html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb48-2"><a href="from-genes-to-networks.html#cb48-2" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="from-genes-to-networks.html#cb48-3" tabindex="-1"></a>edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb48-4"><a href="from-genes-to-networks.html#cb48-4" tabindex="-1"></a>  <span class="at">from=</span><span class="fu">c</span>(<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;MYC&quot;</span>,<span class="st">&quot;EGFR&quot;</span>,<span class="st">&quot;BRCA1&quot;</span>),</span>
+<span id="cb48-5"><a href="from-genes-to-networks.html#cb48-5" tabindex="-1"></a>  <span class="at">to=</span><span class="fu">c</span>(<span class="st">&quot;MYC&quot;</span>,<span class="st">&quot;EGFR&quot;</span>,<span class="st">&quot;MTOR&quot;</span>,<span class="st">&quot;TP53&quot;</span>)</span>
+<span id="cb48-6"><a href="from-genes-to-networks.html#cb48-6" tabindex="-1"></a>)</span>
+<span id="cb48-7"><a href="from-genes-to-networks.html#cb48-7" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="from-genes-to-networks.html#cb48-8" tabindex="-1"></a>g_simple <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(edges, <span class="at">directed=</span><span class="cn">FALSE</span>)</span>
+<span id="cb48-9"><a href="from-genes-to-networks.html#cb48-9" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="from-genes-to-networks.html#cb48-10" tabindex="-1"></a><span class="fu">plot</span>(g_simple,</span>
+<span id="cb48-11"><a href="from-genes-to-networks.html#cb48-11" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;A Simple Gene Interaction Network&quot;</span>,</span>
+<span id="cb48-12"><a href="from-genes-to-networks.html#cb48-12" tabindex="-1"></a>     <span class="at">vertex.size=</span><span class="dv">30</span>,</span>
+<span id="cb48-13"><a href="from-genes-to-networks.html#cb48-13" tabindex="-1"></a>     <span class="at">vertex.label.cex=</span><span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="BioNetR_Ignite_files/figure-html/unnamed-chunk-18-1.png" alt="" width="672" /></p>
+<p>This introduces the idea of nodes (genes) and edges (interactions).</p>
+<hr />
+</div>
+<div id="moving-to-real-biological-data" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Moving to Real Biological Data<a href="from-genes-to-networks.html#moving-to-real-biological-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now use the STRING database to construct a biologically meaningful network.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="from-genes-to-networks.html#cb49-1" tabindex="-1"></a><span class="fu">library</span>(STRINGdb)</span>
+<span id="cb49-2"><a href="from-genes-to-networks.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="from-genes-to-networks.html#cb49-3" tabindex="-1"></a>string_db <span class="ot">&lt;-</span> STRINGdb<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb49-4"><a href="from-genes-to-networks.html#cb49-4" tabindex="-1"></a>  <span class="at">version=</span><span class="st">&quot;11.5&quot;</span>,</span>
+<span id="cb49-5"><a href="from-genes-to-networks.html#cb49-5" tabindex="-1"></a>  <span class="at">species=</span><span class="dv">9606</span>,</span>
+<span id="cb49-6"><a href="from-genes-to-networks.html#cb49-6" tabindex="-1"></a>  <span class="at">score_threshold=</span><span class="dv">200</span></span>
+<span id="cb49-7"><a href="from-genes-to-networks.html#cb49-7" tabindex="-1"></a>)</span></code></pre></div>
+<p>We begin with a set of important genes:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="from-genes-to-networks.html#cb50-1" tabindex="-1"></a>GeneNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;MDM2&quot;</span>,<span class="st">&quot;BRCA1&quot;</span>,<span class="st">&quot;EGFR&quot;</span>,<span class="st">&quot;MYC&quot;</span>,</span>
+<span id="cb50-2"><a href="from-genes-to-networks.html#cb50-2" tabindex="-1"></a>               <span class="st">&quot;AKT1&quot;</span>,<span class="st">&quot;PIK3CA&quot;</span>,<span class="st">&quot;CDK1&quot;</span>,<span class="st">&quot;CDK2&quot;</span>,<span class="st">&quot;RB1&quot;</span>)</span>
+<span id="cb50-3"><a href="from-genes-to-networks.html#cb50-3" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="from-genes-to-networks.html#cb50-4" tabindex="-1"></a>genes_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Gene=</span>GeneNames)</span></code></pre></div>
+<p>These genes are mapped to STRING identifiers:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="from-genes-to-networks.html#cb51-1" tabindex="-1"></a>mapped <span class="ot">&lt;-</span> string_db<span class="sc">$</span><span class="fu">map</span>(genes_df,<span class="st">&quot;Gene&quot;</span>,<span class="at">removeUnmappedRows=</span><span class="cn">TRUE</span>)</span>
+<span id="cb51-2"><a href="from-genes-to-networks.html#cb51-2" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="from-genes-to-networks.html#cb51-3" tabindex="-1"></a>mapped</span></code></pre></div>
+<pre><code>##      Gene            STRING_id
+## 1    TP53 9606.ENSP00000269305
+## 2    MDM2 9606.ENSP00000258149
+## 3   BRCA1 9606.ENSP00000418960
+## 4    EGFR 9606.ENSP00000275493
+## 5     MYC 9606.ENSP00000479618
+## 6    AKT1 9606.ENSP00000451828
+## 7  PIK3CA 9606.ENSP00000263967
+## 8    CDK1 9606.ENSP00000378699
+## 9    CDK2 9606.ENSP00000266970
+## 10    RB1 9606.ENSP00000267163</code></pre>
+<hr />
+</div>
+<div id="expanding-into-a-large-network" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Expanding into a Large Network<a href="from-genes-to-networks.html#expanding-into-a-large-network" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A small gene list alone is not enough to produce a rich network. Therefore, we expand it by including interacting partners.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="from-genes-to-networks.html#cb53-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb53-2"><a href="from-genes-to-networks.html#cb53-2" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="from-genes-to-networks.html#cb53-3" tabindex="-1"></a>hits <span class="ot">&lt;-</span> mapped<span class="sc">$</span>STRING_id</span>
+<span id="cb53-4"><a href="from-genes-to-networks.html#cb53-4" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="from-genes-to-networks.html#cb53-5" tabindex="-1"></a><span class="co"># First-level neighbors</span></span>
+<span id="cb53-6"><a href="from-genes-to-networks.html#cb53-6" tabindex="-1"></a>neighbors_lvl1 <span class="ot">&lt;-</span> string_db<span class="sc">$</span><span class="fu">get_neighbors</span>(hits)</span>
+<span id="cb53-7"><a href="from-genes-to-networks.html#cb53-7" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="from-genes-to-networks.html#cb53-8" tabindex="-1"></a><span class="co"># Second-level neighbors (more expansion)</span></span>
+<span id="cb53-9"><a href="from-genes-to-networks.html#cb53-9" tabindex="-1"></a>neighbors_lvl2 <span class="ot">&lt;-</span> string_db<span class="sc">$</span><span class="fu">get_neighbors</span>(neighbors_lvl1)</span>
+<span id="cb53-10"><a href="from-genes-to-networks.html#cb53-10" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="from-genes-to-networks.html#cb53-11" tabindex="-1"></a><span class="co"># Combine all nodes</span></span>
+<span id="cb53-12"><a href="from-genes-to-networks.html#cb53-12" tabindex="-1"></a>all_nodes <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(hits, neighbors_lvl1, neighbors_lvl2))</span>
+<span id="cb53-13"><a href="from-genes-to-networks.html#cb53-13" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="from-genes-to-networks.html#cb53-14" tabindex="-1"></a><span class="co"># Sample to keep network manageable but rich</span></span>
+<span id="cb53-15"><a href="from-genes-to-networks.html#cb53-15" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb53-16"><a href="from-genes-to-networks.html#cb53-16" tabindex="-1"></a>all_nodes <span class="ot">&lt;-</span> <span class="fu">sample</span>(all_nodes, <span class="fu">min</span>(<span class="dv">180</span>, <span class="fu">length</span>(all_nodes)))</span>
+<span id="cb53-17"><a href="from-genes-to-networks.html#cb53-17" tabindex="-1"></a></span>
+<span id="cb53-18"><a href="from-genes-to-networks.html#cb53-18" tabindex="-1"></a><span class="co"># Retrieve interactions</span></span>
+<span id="cb53-19"><a href="from-genes-to-networks.html#cb53-19" tabindex="-1"></a>edges <span class="ot">&lt;-</span> string_db<span class="sc">$</span><span class="fu">get_interactions</span>(all_nodes)</span>
+<span id="cb53-20"><a href="from-genes-to-networks.html#cb53-20" tabindex="-1"></a></span>
+<span id="cb53-21"><a href="from-genes-to-networks.html#cb53-21" tabindex="-1"></a><span class="co"># Relax filtering to ensure dense network</span></span>
+<span id="cb53-22"><a href="from-genes-to-networks.html#cb53-22" tabindex="-1"></a>edges <span class="ot">&lt;-</span> edges[edges<span class="sc">$</span>combined_score <span class="sc">&gt;=</span> <span class="dv">250</span>, ]</span>
+<span id="cb53-23"><a href="from-genes-to-networks.html#cb53-23" tabindex="-1"></a></span>
+<span id="cb53-24"><a href="from-genes-to-networks.html#cb53-24" tabindex="-1"></a><span class="co"># Fallback if too sparse</span></span>
+<span id="cb53-25"><a href="from-genes-to-networks.html#cb53-25" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">nrow</span>(edges) <span class="sc">&lt;</span> <span class="dv">300</span>){</span>
+<span id="cb53-26"><a href="from-genes-to-networks.html#cb53-26" tabindex="-1"></a>  edges <span class="ot">&lt;-</span> string_db<span class="sc">$</span><span class="fu">get_interactions</span>(all_nodes)</span>
+<span id="cb53-27"><a href="from-genes-to-networks.html#cb53-27" tabindex="-1"></a>}</span>
+<span id="cb53-28"><a href="from-genes-to-networks.html#cb53-28" tabindex="-1"></a></span>
+<span id="cb53-29"><a href="from-genes-to-networks.html#cb53-29" tabindex="-1"></a><span class="co"># Build graph</span></span>
+<span id="cb53-30"><a href="from-genes-to-networks.html#cb53-30" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(edges[,<span class="fu">c</span>(<span class="st">&quot;from&quot;</span>,<span class="st">&quot;to&quot;</span>)], <span class="at">directed=</span><span class="cn">FALSE</span>)</span>
+<span id="cb53-31"><a href="from-genes-to-networks.html#cb53-31" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">simplify</span>(g)</span>
+<span id="cb53-32"><a href="from-genes-to-networks.html#cb53-32" tabindex="-1"></a></span>
+<span id="cb53-33"><a href="from-genes-to-networks.html#cb53-33" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Number of nodes:&quot;</span>, <span class="fu">vcount</span>(g), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Number of nodes: 149</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="from-genes-to-networks.html#cb55-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Number of edges:&quot;</span>, <span class="fu">ecount</span>(g), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Number of edges: 288</code></pre>
+<p>This guarantees a sufficiently large and visually meaningful network.</p>
+<hr />
+</div>
+<div id="visualizing-the-network" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Visualizing the Network<a href="from-genes-to-networks.html#visualizing-the-network" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We highlight the original query genes within the expanded network.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="from-genes-to-networks.html#cb57-1" tabindex="-1"></a><span class="fu">V</span>(g)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">V</span>(g)<span class="sc">$</span>name <span class="sc">%in%</span> hits, <span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb57-2"><a href="from-genes-to-networks.html#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="from-genes-to-networks.html#cb57-3" tabindex="-1"></a><span class="fu">plot</span>(g,</span>
+<span id="cb57-4"><a href="from-genes-to-networks.html#cb57-4" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Expanded STRING Network&quot;</span>,</span>
+<span id="cb57-5"><a href="from-genes-to-networks.html#cb57-5" tabindex="-1"></a>     <span class="at">vertex.size=</span><span class="dv">5</span>,</span>
+<span id="cb57-6"><a href="from-genes-to-networks.html#cb57-6" tabindex="-1"></a>     <span class="at">vertex.label=</span><span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="BioNetR_Ignite_files/figure-html/unnamed-chunk-23-1.png" alt="" width="672" /></p>
+<hr />
+</div>
+<div id="understanding-network-structure" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Understanding Network Structure<a href="from-genes-to-networks.html#understanding-network-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now quantify the importance of each gene using centrality measures.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="from-genes-to-networks.html#cb58-1" tabindex="-1"></a>degVals <span class="ot">&lt;-</span> <span class="fu">degree</span>(g)</span>
+<span id="cb58-2"><a href="from-genes-to-networks.html#cb58-2" tabindex="-1"></a>betVals <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(g)</span>
+<span id="cb58-3"><a href="from-genes-to-networks.html#cb58-3" tabindex="-1"></a>cloVals <span class="ot">&lt;-</span> <span class="fu">closeness</span>(g)</span>
+<span id="cb58-4"><a href="from-genes-to-networks.html#cb58-4" tabindex="-1"></a></span>
+<span id="cb58-5"><a href="from-genes-to-networks.html#cb58-5" tabindex="-1"></a>centrality_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb58-6"><a href="from-genes-to-networks.html#cb58-6" tabindex="-1"></a>  <span class="at">Gene=</span><span class="fu">V</span>(g)<span class="sc">$</span>name,</span>
+<span id="cb58-7"><a href="from-genes-to-networks.html#cb58-7" tabindex="-1"></a>  <span class="at">Degree=</span>degVals,</span>
+<span id="cb58-8"><a href="from-genes-to-networks.html#cb58-8" tabindex="-1"></a>  <span class="at">Betweenness=</span>betVals,</span>
+<span id="cb58-9"><a href="from-genes-to-networks.html#cb58-9" tabindex="-1"></a>  <span class="at">Closeness=</span>cloVals</span>
+<span id="cb58-10"><a href="from-genes-to-networks.html#cb58-10" tabindex="-1"></a>)</span>
+<span id="cb58-11"><a href="from-genes-to-networks.html#cb58-11" tabindex="-1"></a></span>
+<span id="cb58-12"><a href="from-genes-to-networks.html#cb58-12" tabindex="-1"></a><span class="fu">head</span>(centrality_df)</span></code></pre></div>
+<pre><code>##                                      Gene Degree Betweenness   Closeness
+## 9606.ENSP00000217515 9606.ENSP00000217515      4   73.915276 0.001980198
+## 9606.ENSP00000216099 9606.ENSP00000216099      4    5.904582 0.001972387
+## 9606.ENSP00000242592 9606.ENSP00000242592      6   50.537393 0.002100840
+## 9606.ENSP00000171757 9606.ENSP00000171757      6  304.938203 0.001776199
+## 9606.ENSP00000244061 9606.ENSP00000244061      2    0.000000 0.001592357
+## 9606.ENSP00000080059 9606.ENSP00000080059      9  692.716668 0.002380952</code></pre>
+<div id="interpretation" class="section level4 hasAnchor" number="5.5.0.1">
+<h4><span class="header-section-number">5.5.0.1</span> Interpretation<a href="from-genes-to-networks.html#interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Degree</strong> → identifies hub genes (high connectivity)</li>
+<li><strong>Betweenness</strong> → identifies bottlenecks controlling flow</li>
+<li><strong>Closeness</strong> → identifies genes with efficient communication</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="highlighting-important-genes" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Highlighting Important Genes<a href="from-genes-to-networks.html#highlighting-important-genes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We encode importance visually.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="from-genes-to-networks.html#cb60-1" tabindex="-1"></a><span class="fu">V</span>(g)<span class="sc">$</span>size <span class="ot">&lt;-</span> scales<span class="sc">::</span><span class="fu">rescale</span>(degVals, <span class="at">to=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">12</span>))</span>
+<span id="cb60-2"><a href="from-genes-to-networks.html#cb60-2" tabindex="-1"></a><span class="fu">V</span>(g)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">heat.colors</span>(<span class="fu">length</span>(degVals))[<span class="fu">rank</span>(degVals)]</span>
+<span id="cb60-3"><a href="from-genes-to-networks.html#cb60-3" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="from-genes-to-networks.html#cb60-4" tabindex="-1"></a><span class="fu">plot</span>(g,</span>
+<span id="cb60-5"><a href="from-genes-to-networks.html#cb60-5" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Network Highlighting Hub Genes&quot;</span>,</span>
+<span id="cb60-6"><a href="from-genes-to-networks.html#cb60-6" tabindex="-1"></a>     <span class="at">vertex.label=</span><span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="BioNetR_Ignite_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" /></p>
+<p>Nodes that are larger and warmer in color are more influential.</p>
+<hr />
+</div>
+<div id="detecting-functional-modules" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Detecting Functional Modules<a href="from-genes-to-networks.html#detecting-functional-modules" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Biological networks often contain clusters corresponding to functional groups.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="from-genes-to-networks.html#cb61-1" tabindex="-1"></a>clusters <span class="ot">&lt;-</span> <span class="fu">cluster_louvain</span>(g)</span>
+<span id="cb61-2"><a href="from-genes-to-networks.html#cb61-2" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="from-genes-to-networks.html#cb61-3" tabindex="-1"></a><span class="fu">V</span>(g)<span class="sc">$</span>color <span class="ot">&lt;-</span> clusters<span class="sc">$</span>membership</span>
+<span id="cb61-4"><a href="from-genes-to-networks.html#cb61-4" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="from-genes-to-networks.html#cb61-5" tabindex="-1"></a><span class="fu">plot</span>(g,</span>
+<span id="cb61-6"><a href="from-genes-to-networks.html#cb61-6" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Network Communities&quot;</span>,</span>
+<span id="cb61-7"><a href="from-genes-to-networks.html#cb61-7" tabindex="-1"></a>     <span class="at">vertex.size=</span><span class="dv">5</span>,</span>
+<span id="cb61-8"><a href="from-genes-to-networks.html#cb61-8" tabindex="-1"></a>     <span class="at">vertex.label=</span><span class="cn">NA</span>)</span></code></pre></div>
+<p><img src="BioNetR_Ignite_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672" /></p>
+<hr />
+</div>
+<div id="interactive-network-exploration" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Interactive Network Exploration<a href="from-genes-to-networks.html#interactive-network-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Finally, we create an interactive network for deeper exploration.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="from-genes-to-networks.html#cb62-1" tabindex="-1"></a><span class="fu">library</span>(visNetwork)</span>
+<span id="cb62-2"><a href="from-genes-to-networks.html#cb62-2" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="from-genes-to-networks.html#cb62-3" tabindex="-1"></a>nodes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb62-4"><a href="from-genes-to-networks.html#cb62-4" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">V</span>(g)<span class="sc">$</span>name,</span>
+<span id="cb62-5"><a href="from-genes-to-networks.html#cb62-5" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">V</span>(g)<span class="sc">$</span>name,</span>
+<span id="cb62-6"><a href="from-genes-to-networks.html#cb62-6" tabindex="-1"></a>  <span class="at">group =</span> clusters<span class="sc">$</span>membership,</span>
+<span id="cb62-7"><a href="from-genes-to-networks.html#cb62-7" tabindex="-1"></a>  <span class="at">value =</span> degVals</span>
+<span id="cb62-8"><a href="from-genes-to-networks.html#cb62-8" tabindex="-1"></a>)</span>
+<span id="cb62-9"><a href="from-genes-to-networks.html#cb62-9" tabindex="-1"></a></span>
+<span id="cb62-10"><a href="from-genes-to-networks.html#cb62-10" tabindex="-1"></a>edges_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">get.edgelist</span>(g))</span></code></pre></div>
+<pre><code>## Warning: `get.edgelist()` was deprecated in igraph 2.0.0.
+## ℹ Please use `as_edgelist()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="from-genes-to-networks.html#cb64-1" tabindex="-1"></a><span class="fu">colnames</span>(edges_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;from&quot;</span>,<span class="st">&quot;to&quot;</span>)</span>
+<span id="cb64-2"><a href="from-genes-to-networks.html#cb64-2" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="from-genes-to-networks.html#cb64-3" tabindex="-1"></a><span class="fu">visNetwork</span>(nodes, edges_df) <span class="sc">%&gt;%</span></span>
+<span id="cb64-4"><a href="from-genes-to-networks.html#cb64-4" tabindex="-1"></a>  <span class="fu">visNodes</span>(<span class="at">scaling=</span><span class="fu">list</span>(<span class="at">min=</span><span class="dv">5</span>, <span class="at">max=</span><span class="dv">30</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb64-5"><a href="from-genes-to-networks.html#cb64-5" tabindex="-1"></a>  <span class="fu">visEdges</span>(<span class="at">smooth=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-6"><a href="from-genes-to-networks.html#cb64-6" tabindex="-1"></a>  <span class="fu">visOptions</span>(<span class="at">highlightNearest=</span><span class="cn">TRUE</span>,</span>
+<span id="cb64-7"><a href="from-genes-to-networks.html#cb64-7" tabindex="-1"></a>             <span class="at">nodesIdSelection=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-8"><a href="from-genes-to-networks.html#cb64-8" tabindex="-1"></a>  <span class="fu">visLayout</span>(<span class="at">randomSeed=</span><span class="dv">42</span>)</span></code></pre></div>
+<div class="visNetwork html-widget html-fill-item" id="htmlwidget-1c9f5c66f00266831415" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-1c9f5c66f00266831415">{"x":{"nodes":{"id":["9606.ENSP00000217515","9606.ENSP00000216099","9606.ENSP00000242592","9606.ENSP00000171757","9606.ENSP00000244061","9606.ENSP00000080059","9606.ENSP00000220853","9606.ENSP00000249269","9606.ENSP00000220592","9606.ENSP00000261655","9606.ENSP00000262030","9606.ENSP00000262288","9606.ENSP00000253754","9606.ENSP00000262133","9606.ENSP00000256196","9606.ENSP00000264260","9606.ENSP00000256441","9606.ENSP00000280605","9606.ENSP00000255380","9606.ENSP00000284073","9606.ENSP00000303584","9606.ENSP00000262231","9606.ENSP00000262717","9606.ENSP00000263780","9606.ENSP00000282541","9606.ENSP00000283148","9606.ENSP00000260247","9606.ENSP00000267973","9606.ENSP00000260818","9606.ENSP00000263208","9606.ENSP00000307519","9606.ENSP00000273550","9606.ENSP00000300589","9606.ENSP00000306129","9606.ENSP00000259056","9606.ENSP00000300176","9606.ENSP00000321951","9606.ENSP00000349305","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000357881","9606.ENSP00000341938","9606.ENSP00000345163","9606.ENSP00000349961","9606.ENSP00000296468","9606.ENSP00000301587","9606.ENSP00000311135","9606.ENSP00000342499","9606.ENSP00000357863","9606.ENSP00000363524","9606.ENSP00000330720","9606.ENSP00000343435","9606.ENSP00000305533","9606.ENSP00000355672","9606.ENSP00000362273","9606.ENSP00000366974","9606.ENSP00000074304","9606.ENSP00000323580","9606.ENSP00000359474","9606.ENSP00000376436","9606.ENSP00000300527","9606.ENSP00000300051","9606.ENSP00000336866","9606.ENSP00000364815","9606.ENSP00000370966","9606.ENSP00000379258","9606.ENSP00000261745","9606.ENSP00000347298","9606.ENSP00000381782","9606.ENSP00000342840","9606.ENSP00000363553","9606.ENSP00000359575","9606.ENSP00000366542","9606.ENSP00000343331","9606.ENSP00000357256","9606.ENSP00000366976","9606.ENSP00000359837","9606.ENSP00000382071","9606.ENSP00000384474","9606.ENSP00000335147","9606.ENSP00000351422","9606.ENSP00000371994","9606.ENSP00000386069","9606.ENSP00000410059","9606.ENSP00000309640","9606.ENSP00000363398","9606.ENSP00000309052","9606.ENSP00000331342","9606.ENSP00000342681","9606.ENSP00000216180","9606.ENSP00000381937","9606.ENSP00000399979","9606.ENSP00000392189","9606.ENSP00000370104","9606.ENSP00000389168","9606.ENSP00000411010","9606.ENSP00000429969","9606.ENSP00000373905","9606.ENSP00000262370","9606.ENSP00000369681","9606.ENSP00000449328","9606.ENSP00000468002","9606.ENSP00000471604","9606.ENSP00000430684","9606.ENSP00000278319","9606.ENSP00000389243","9606.ENSP00000429301","9606.ENSP00000297508","9606.ENSP00000299191","9606.ENSP00000307041","9606.ENSP00000330442","9606.ENSP00000336752","9606.ENSP00000338814","9606.ENSP00000340836","9606.ENSP00000342570","9606.ENSP00000343445","9606.ENSP00000369862","9606.ENSP00000372191","9606.ENSP00000375904","9606.ENSP00000379383","9606.ENSP00000380646","9606.ENSP00000382717","9606.ENSP00000386773","9606.ENSP00000389810","9606.ENSP00000392318","9606.ENSP00000403441","9606.ENSP00000411593","9606.ENSP00000411822","9606.ENSP00000415454","9606.ENSP00000419313","9606.ENSP00000419395","9606.ENSP00000419485","9606.ENSP00000420065","9606.ENSP00000442400","9606.ENSP00000442973","9606.ENSP00000453076","9606.ENSP00000454468","9606.ENSP00000463393","9606.ENSP00000466639","9606.ENSP00000466937","9606.ENSP00000476295","9606.ENSP00000482538","9606.ENSP00000482829","9606.ENSP00000483484","9606.ENSP00000483609","9606.ENSP00000483621","9606.ENSP00000483825","9606.ENSP00000484931","9606.ENSP00000485326"],"label":["9606.ENSP00000217515","9606.ENSP00000216099","9606.ENSP00000242592","9606.ENSP00000171757","9606.ENSP00000244061","9606.ENSP00000080059","9606.ENSP00000220853","9606.ENSP00000249269","9606.ENSP00000220592","9606.ENSP00000261655","9606.ENSP00000262030","9606.ENSP00000262288","9606.ENSP00000253754","9606.ENSP00000262133","9606.ENSP00000256196","9606.ENSP00000264260","9606.ENSP00000256441","9606.ENSP00000280605","9606.ENSP00000255380","9606.ENSP00000284073","9606.ENSP00000303584","9606.ENSP00000262231","9606.ENSP00000262717","9606.ENSP00000263780","9606.ENSP00000282541","9606.ENSP00000283148","9606.ENSP00000260247","9606.ENSP00000267973","9606.ENSP00000260818","9606.ENSP00000263208","9606.ENSP00000307519","9606.ENSP00000273550","9606.ENSP00000300589","9606.ENSP00000306129","9606.ENSP00000259056","9606.ENSP00000300176","9606.ENSP00000321951","9606.ENSP00000349305","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000357881","9606.ENSP00000341938","9606.ENSP00000345163","9606.ENSP00000349961","9606.ENSP00000296468","9606.ENSP00000301587","9606.ENSP00000311135","9606.ENSP00000342499","9606.ENSP00000357863","9606.ENSP00000363524","9606.ENSP00000330720","9606.ENSP00000343435","9606.ENSP00000305533","9606.ENSP00000355672","9606.ENSP00000362273","9606.ENSP00000366974","9606.ENSP00000074304","9606.ENSP00000323580","9606.ENSP00000359474","9606.ENSP00000376436","9606.ENSP00000300527","9606.ENSP00000300051","9606.ENSP00000336866","9606.ENSP00000364815","9606.ENSP00000370966","9606.ENSP00000379258","9606.ENSP00000261745","9606.ENSP00000347298","9606.ENSP00000381782","9606.ENSP00000342840","9606.ENSP00000363553","9606.ENSP00000359575","9606.ENSP00000366542","9606.ENSP00000343331","9606.ENSP00000357256","9606.ENSP00000366976","9606.ENSP00000359837","9606.ENSP00000382071","9606.ENSP00000384474","9606.ENSP00000335147","9606.ENSP00000351422","9606.ENSP00000371994","9606.ENSP00000386069","9606.ENSP00000410059","9606.ENSP00000309640","9606.ENSP00000363398","9606.ENSP00000309052","9606.ENSP00000331342","9606.ENSP00000342681","9606.ENSP00000216180","9606.ENSP00000381937","9606.ENSP00000399979","9606.ENSP00000392189","9606.ENSP00000370104","9606.ENSP00000389168","9606.ENSP00000411010","9606.ENSP00000429969","9606.ENSP00000373905","9606.ENSP00000262370","9606.ENSP00000369681","9606.ENSP00000449328","9606.ENSP00000468002","9606.ENSP00000471604","9606.ENSP00000430684","9606.ENSP00000278319","9606.ENSP00000389243","9606.ENSP00000429301","9606.ENSP00000297508","9606.ENSP00000299191","9606.ENSP00000307041","9606.ENSP00000330442","9606.ENSP00000336752","9606.ENSP00000338814","9606.ENSP00000340836","9606.ENSP00000342570","9606.ENSP00000343445","9606.ENSP00000369862","9606.ENSP00000372191","9606.ENSP00000375904","9606.ENSP00000379383","9606.ENSP00000380646","9606.ENSP00000382717","9606.ENSP00000386773","9606.ENSP00000389810","9606.ENSP00000392318","9606.ENSP00000403441","9606.ENSP00000411593","9606.ENSP00000411822","9606.ENSP00000415454","9606.ENSP00000419313","9606.ENSP00000419395","9606.ENSP00000419485","9606.ENSP00000420065","9606.ENSP00000442400","9606.ENSP00000442973","9606.ENSP00000453076","9606.ENSP00000454468","9606.ENSP00000463393","9606.ENSP00000466639","9606.ENSP00000466937","9606.ENSP00000476295","9606.ENSP00000482538","9606.ENSP00000482829","9606.ENSP00000483484","9606.ENSP00000483609","9606.ENSP00000483621","9606.ENSP00000483825","9606.ENSP00000484931","9606.ENSP00000485326"],"group":[1,2,2,3,4,1,2,2,5,6,2,5,7,5,8,3,2,2,3,2,2,6,6,5,6,6,4,4,4,5,4,2,3,3,6,4,6,4,6,6,5,3,5,5,3,2,2,2,2,5,9,4,2,2,3,5,10,5,6,8,8,2,5,2,5,5,1,4,4,3,3,1,10,5,5,9,5,5,4,5,4,2,3,2,6,6,10,3,3,5,5,11,9,1,1,2,11,4,1,4,2,1,2,3,10,10,3,7,5,7,6,4,4,6,8,4,6,2,6,8,5,5,4,5,5,5,3,2,6,10,3,3,5,9,1,3,11,4,2,1,5,5,1,2,3,10,3,10,3],"value":[4,4,6,6,2,9,1,14,6,6,17,5,2,5,4,2,2,3,4,6,3,3,5,1,2,3,4,5,4,11,3,5,6,5,4,2,7,3,5,6,1,2,2,12,2,13,6,1,1,4,3,4,1,2,2,13,2,3,4,3,2,3,6,15,3,7,4,2,2,4,7,3,2,1,1,3,2,4,8,2,2,2,5,8,1,6,3,3,4,1,2,2,3,1,4,6,2,7,1,4,14,5,3,3,1,2,3,1,1,1,2,3,4,1,1,1,1,8,1,1,2,4,1,5,6,1,5,1,3,1,3,1,5,3,3,1,1,3,4,3,13,4,1,10,1,2,4,3,1]},"edges":{"from":["9606.ENSP00000217515","9606.ENSP00000217515","9606.ENSP00000217515","9606.ENSP00000217515","9606.ENSP00000216099","9606.ENSP00000216099","9606.ENSP00000216099","9606.ENSP00000216099","9606.ENSP00000242592","9606.ENSP00000242592","9606.ENSP00000242592","9606.ENSP00000242592","9606.ENSP00000242592","9606.ENSP00000171757","9606.ENSP00000171757","9606.ENSP00000171757","9606.ENSP00000171757","9606.ENSP00000171757","9606.ENSP00000171757","9606.ENSP00000244061","9606.ENSP00000244061","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000080059","9606.ENSP00000220853","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000249269","9606.ENSP00000220592","9606.ENSP00000220592","9606.ENSP00000220592","9606.ENSP00000220592","9606.ENSP00000220592","9606.ENSP00000220592","9606.ENSP00000261655","9606.ENSP00000261655","9606.ENSP00000261655","9606.ENSP00000261655","9606.ENSP00000261655","9606.ENSP00000261655","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000262288","9606.ENSP00000262288","9606.ENSP00000262288","9606.ENSP00000262288","9606.ENSP00000262288","9606.ENSP00000253754","9606.ENSP00000253754","9606.ENSP00000262133","9606.ENSP00000262133","9606.ENSP00000262133","9606.ENSP00000262133","9606.ENSP00000256196","9606.ENSP00000256196","9606.ENSP00000256196","9606.ENSP00000256196","9606.ENSP00000264260","9606.ENSP00000256441","9606.ENSP00000256441","9606.ENSP00000280605","9606.ENSP00000280605","9606.ENSP00000280605","9606.ENSP00000255380","9606.ENSP00000255380","9606.ENSP00000255380","9606.ENSP00000284073","9606.ENSP00000284073","9606.ENSP00000284073","9606.ENSP00000284073","9606.ENSP00000303584","9606.ENSP00000303584","9606.ENSP00000262231","9606.ENSP00000262231","9606.ENSP00000262717","9606.ENSP00000262717","9606.ENSP00000262717","9606.ENSP00000262717","9606.ENSP00000262717","9606.ENSP00000263780","9606.ENSP00000282541","9606.ENSP00000282541","9606.ENSP00000283148","9606.ENSP00000283148","9606.ENSP00000283148","9606.ENSP00000260247","9606.ENSP00000260247","9606.ENSP00000260247","9606.ENSP00000267973","9606.ENSP00000267973","9606.ENSP00000267973","9606.ENSP00000267973","9606.ENSP00000267973","9606.ENSP00000260818","9606.ENSP00000260818","9606.ENSP00000260818","9606.ENSP00000260818","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000263208","9606.ENSP00000307519","9606.ENSP00000307519","9606.ENSP00000307519","9606.ENSP00000273550","9606.ENSP00000273550","9606.ENSP00000273550","9606.ENSP00000300589","9606.ENSP00000300589","9606.ENSP00000300589","9606.ENSP00000300589","9606.ENSP00000306129","9606.ENSP00000306129","9606.ENSP00000306129","9606.ENSP00000306129","9606.ENSP00000259056","9606.ENSP00000259056","9606.ENSP00000259056","9606.ENSP00000259056","9606.ENSP00000300176","9606.ENSP00000300176","9606.ENSP00000321951","9606.ENSP00000321951","9606.ENSP00000321951","9606.ENSP00000321951","9606.ENSP00000349305","9606.ENSP00000349677","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000357067","9606.ENSP00000357881","9606.ENSP00000341938","9606.ENSP00000341938","9606.ENSP00000345163","9606.ENSP00000345163","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000349961","9606.ENSP00000296468","9606.ENSP00000296468","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000301587","9606.ENSP00000311135","9606.ENSP00000311135","9606.ENSP00000311135","9606.ENSP00000311135","9606.ENSP00000342499","9606.ENSP00000357863","9606.ENSP00000363524","9606.ENSP00000363524","9606.ENSP00000330720","9606.ENSP00000330720","9606.ENSP00000330720","9606.ENSP00000343435","9606.ENSP00000343435","9606.ENSP00000343435","9606.ENSP00000305533","9606.ENSP00000355672","9606.ENSP00000355672","9606.ENSP00000362273","9606.ENSP00000366974","9606.ENSP00000366974","9606.ENSP00000366974","9606.ENSP00000366974","9606.ENSP00000366974","9606.ENSP00000366974","9606.ENSP00000074304","9606.ENSP00000074304","9606.ENSP00000323580","9606.ENSP00000323580","9606.ENSP00000359474","9606.ENSP00000376436","9606.ENSP00000300527","9606.ENSP00000300051","9606.ENSP00000336866","9606.ENSP00000336866","9606.ENSP00000336866","9606.ENSP00000336866","9606.ENSP00000364815","9606.ENSP00000364815","9606.ENSP00000364815","9606.ENSP00000364815","9606.ENSP00000370966","9606.ENSP00000370966","9606.ENSP00000379258","9606.ENSP00000261745","9606.ENSP00000261745","9606.ENSP00000261745","9606.ENSP00000261745","9606.ENSP00000347298","9606.ENSP00000381782","9606.ENSP00000342840","9606.ENSP00000363553","9606.ENSP00000363553","9606.ENSP00000363553","9606.ENSP00000359575","9606.ENSP00000359575","9606.ENSP00000359575","9606.ENSP00000366542","9606.ENSP00000366542","9606.ENSP00000343331","9606.ENSP00000357256","9606.ENSP00000366976","9606.ENSP00000366976","9606.ENSP00000359837","9606.ENSP00000382071","9606.ENSP00000384474","9606.ENSP00000384474","9606.ENSP00000335147","9606.ENSP00000335147","9606.ENSP00000351422","9606.ENSP00000371994","9606.ENSP00000386069","9606.ENSP00000410059","9606.ENSP00000410059","9606.ENSP00000410059","9606.ENSP00000309640","9606.ENSP00000363398","9606.ENSP00000309052","9606.ENSP00000309052","9606.ENSP00000331342","9606.ENSP00000331342","9606.ENSP00000331342","9606.ENSP00000342681","9606.ENSP00000216180","9606.ENSP00000381937","9606.ENSP00000399979","9606.ENSP00000399979","9606.ENSP00000392189","9606.ENSP00000370104","9606.ENSP00000389168","9606.ENSP00000411010","9606.ENSP00000411010","9606.ENSP00000411010","9606.ENSP00000429969","9606.ENSP00000373905","9606.ENSP00000373905","9606.ENSP00000262370","9606.ENSP00000369681","9606.ENSP00000369681","9606.ENSP00000449328","9606.ENSP00000449328","9606.ENSP00000468002","9606.ENSP00000471604","9606.ENSP00000430684","9606.ENSP00000278319","9606.ENSP00000389243","9606.ENSP00000429301"],"to":["9606.ENSP00000242592","9606.ENSP00000364815","9606.ENSP00000342840","9606.ENSP00000389168","9606.ENSP00000249269","9606.ENSP00000262030","9606.ENSP00000301587","9606.ENSP00000466639","9606.ENSP00000249269","9606.ENSP00000262030","9606.ENSP00000301587","9606.ENSP00000372191","9606.ENSP00000476295","9606.ENSP00000264260","9606.ENSP00000255380","9606.ENSP00000300589","9606.ENSP00000363553","9606.ENSP00000386069","9606.ENSP00000342681","9606.ENSP00000260247","9606.ENSP00000384474","9606.ENSP00000262030","9606.ENSP00000263208","9606.ENSP00000349961","9606.ENSP00000366974","9606.ENSP00000379258","9606.ENSP00000363553","9606.ENSP00000389168","9606.ENSP00000372191","9606.ENSP00000476295","9606.ENSP00000262030","9606.ENSP00000262030","9606.ENSP00000273550","9606.ENSP00000349961","9606.ENSP00000301587","9606.ENSP00000300051","9606.ENSP00000381782","9606.ENSP00000384474","9606.ENSP00000449328","9606.ENSP00000372191","9606.ENSP00000442973","9606.ENSP00000466639","9606.ENSP00000483484","9606.ENSP00000262133","9606.ENSP00000284073","9606.ENSP00000376436","9606.ENSP00000373905","9606.ENSP00000449328","9606.ENSP00000476295","9606.ENSP00000262231","9606.ENSP00000321951","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000309052","9606.ENSP00000340836","9606.ENSP00000263208","9606.ENSP00000273550","9606.ENSP00000301587","9606.ENSP00000366974","9606.ENSP00000300051","9606.ENSP00000364815","9606.ENSP00000410059","9606.ENSP00000449328","9606.ENSP00000468002","9606.ENSP00000372191","9606.ENSP00000420065","9606.ENSP00000482538","9606.ENSP00000284073","9606.ENSP00000336866","9606.ENSP00000364815","9606.ENSP00000382717","9606.ENSP00000420065","9606.ENSP00000297508","9606.ENSP00000307041","9606.ENSP00000349961","9606.ENSP00000366974","9606.ENSP00000336866","9606.ENSP00000299191","9606.ENSP00000376436","9606.ENSP00000300527","9606.ENSP00000430684","9606.ENSP00000342570","9606.ENSP00000300589","9606.ENSP00000301587","9606.ENSP00000364815","9606.ENSP00000303584","9606.ENSP00000449328","9606.ENSP00000471604","9606.ENSP00000306129","9606.ENSP00000363553","9606.ENSP00000411593","9606.ENSP00000349961","9606.ENSP00000311135","9606.ENSP00000449328","9606.ENSP00000336752","9606.ENSP00000311135","9606.ENSP00000366974","9606.ENSP00000321951","9606.ENSP00000411593","9606.ENSP00000321951","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000359474","9606.ENSP00000411593","9606.ENSP00000323580","9606.ENSP00000364815","9606.ENSP00000330442","9606.ENSP00000363398","9606.ENSP00000330442","9606.ENSP00000375904","9606.ENSP00000384474","9606.ENSP00000336752","9606.ENSP00000476295","9606.ENSP00000373905","9606.ENSP00000369681","9606.ENSP00000336752","9606.ENSP00000338814","9606.ENSP00000483484","9606.ENSP00000349305","9606.ENSP00000347298","9606.ENSP00000373905","9606.ENSP00000338814","9606.ENSP00000349961","9606.ENSP00000366974","9606.ENSP00000364815","9606.ENSP00000379258","9606.ENSP00000342840","9606.ENSP00000449328","9606.ENSP00000338814","9606.ENSP00000476295","9606.ENSP00000482538","9606.ENSP00000338814","9606.ENSP00000343445","9606.ENSP00000386773","9606.ENSP00000342681","9606.ENSP00000449328","9606.ENSP00000429301","9606.ENSP00000342681","9606.ENSP00000430684","9606.ENSP00000483609","9606.ENSP00000483825","9606.ENSP00000342840","9606.ENSP00000386069","9606.ENSP00000363398","9606.ENSP00000419395","9606.ENSP00000343435","9606.ENSP00000363398","9606.ENSP00000415454","9606.ENSP00000482538","9606.ENSP00000349305","9606.ENSP00000463393","9606.ENSP00000349677","9606.ENSP00000357067","9606.ENSP00000359474","9606.ENSP00000363398","9606.ENSP00000351422","9606.ENSP00000357067","9606.ENSP00000369862","9606.ENSP00000359474","9606.ENSP00000363398","9606.ENSP00000359837","9606.ENSP00000362273","9606.ENSP00000419395","9606.ENSP00000363524","9606.ENSP00000476295","9606.ENSP00000363524","9606.ENSP00000366974","9606.ENSP00000364815","9606.ENSP00000373905","9606.ENSP00000380646","9606.ENSP00000389810","9606.ENSP00000476295","9606.ENSP00000363553","9606.ENSP00000429301","9606.ENSP00000364815","9606.ENSP00000370966","9606.ENSP00000410059","9606.ENSP00000449328","9606.ENSP00000372191","9606.ENSP00000466639","9606.ENSP00000476295","9606.ENSP00000483484","9606.ENSP00000364815","9606.ENSP00000411010","9606.ENSP00000411822","9606.ENSP00000483484","9606.ENSP00000364815","9606.ENSP00000364815","9606.ENSP00000366974","9606.ENSP00000389810","9606.ENSP00000366976","9606.ENSP00000392189","9606.ENSP00000442400","9606.ENSP00000410059","9606.ENSP00000369681","9606.ENSP00000463393","9606.ENSP00000371994","9606.ENSP00000372191","9606.ENSP00000483484","9606.ENSP00000372191","9606.ENSP00000379258","9606.ENSP00000382071","9606.ENSP00000372191","9606.ENSP00000392318","9606.ENSP00000476295","9606.ENSP00000482538","9606.ENSP00000373905","9606.ENSP00000484931","9606.ENSP00000379258","9606.ENSP00000382717","9606.ENSP00000379258","9606.ENSP00000379258","9606.ENSP00000379383","9606.ENSP00000380646","9606.ENSP00000382071","9606.ENSP00000381937","9606.ENSP00000392318","9606.ENSP00000420065","9606.ENSP00000382071","9606.ENSP00000410059","9606.ENSP00000449328","9606.ENSP00000483484","9606.ENSP00000382717","9606.ENSP00000476295","9606.ENSP00000382717","9606.ENSP00000384474","9606.ENSP00000411010","9606.ENSP00000392318","9606.ENSP00000466937","9606.ENSP00000384474","9606.ENSP00000384474","9606.ENSP00000386069","9606.ENSP00000386069","9606.ENSP00000389810","9606.ENSP00000453076","9606.ENSP00000389168","9606.ENSP00000468002","9606.ENSP00000466937","9606.ENSP00000389243","9606.ENSP00000483621","9606.ENSP00000389810","9606.ENSP00000389810","9606.ENSP00000392189","9606.ENSP00000442400","9606.ENSP00000392318","9606.ENSP00000392318","9606.ENSP00000392318","9606.ENSP00000466639","9606.ENSP00000403441","9606.ENSP00000476295","9606.ENSP00000410059","9606.ENSP00000411010","9606.ENSP00000411593","9606.ENSP00000449328","9606.ENSP00000411593","9606.ENSP00000483484","9606.ENSP00000415454","9606.ENSP00000415454","9606.ENSP00000419313","9606.ENSP00000483621","9606.ENSP00000419395","9606.ENSP00000466937","9606.ENSP00000483825","9606.ENSP00000419485","9606.ENSP00000420065","9606.ENSP00000420065","9606.ENSP00000429969","9606.ENSP00000454468","9606.ENSP00000442400","9606.ENSP00000442973","9606.ENSP00000442973","9606.ENSP00000449328","9606.ENSP00000471604","9606.ENSP00000483484","9606.ENSP00000449328","9606.ENSP00000463393","9606.ENSP00000476295","9606.ENSP00000468002","9606.ENSP00000468002","9606.ENSP00000483825","9606.ENSP00000476295","9606.ENSP00000483484","9606.ENSP00000482829","9606.ENSP00000483484","9606.ENSP00000483825","9606.ENSP00000484931","9606.ENSP00000484931","9606.ENSP00000485326"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","scaling":{"min":5,"max":30}},"manipulation":{"enabled":false},"edges":{"smooth":false},"layout":{"randomSeed":42}},"groups":["1","2","3","4","5","6","7","8","9","10","11"],"width":null,"height":null,"idselection":{"enabled":true,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":false,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"}},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+<div id="identifying-hub-genes" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Identifying Hub Genes<a href="from-genes-to-networks.html#identifying-hub-genes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We identify the most connected genes in the network.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="from-genes-to-networks.html#cb65-1" tabindex="-1"></a>hubGenes <span class="ot">&lt;-</span> <span class="fu">V</span>(g)<span class="sc">$</span>name[degVals <span class="sc">&gt;</span> <span class="fu">quantile</span>(degVals, <span class="fl">0.75</span>)]</span>
+<span id="cb65-2"><a href="from-genes-to-networks.html#cb65-2" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="from-genes-to-networks.html#cb65-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Hub Genes Identified:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Hub Genes Identified:</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="from-genes-to-networks.html#cb67-1" tabindex="-1"></a><span class="fu">print</span>(hubGenes)</span></code></pre></div>
+<pre><code>##  [1] &quot;9606.ENSP00000242592&quot; &quot;9606.ENSP00000171757&quot; &quot;9606.ENSP00000080059&quot;
+##  [4] &quot;9606.ENSP00000249269&quot; &quot;9606.ENSP00000220592&quot; &quot;9606.ENSP00000261655&quot;
+##  [7] &quot;9606.ENSP00000262030&quot; &quot;9606.ENSP00000284073&quot; &quot;9606.ENSP00000263208&quot;
+## [10] &quot;9606.ENSP00000300589&quot; &quot;9606.ENSP00000321951&quot; &quot;9606.ENSP00000357067&quot;
+## [13] &quot;9606.ENSP00000349961&quot; &quot;9606.ENSP00000301587&quot; &quot;9606.ENSP00000311135&quot;
+## [16] &quot;9606.ENSP00000366974&quot; &quot;9606.ENSP00000336866&quot; &quot;9606.ENSP00000364815&quot;
+## [19] &quot;9606.ENSP00000379258&quot; &quot;9606.ENSP00000363553&quot; &quot;9606.ENSP00000384474&quot;
+## [22] &quot;9606.ENSP00000410059&quot; &quot;9606.ENSP00000363398&quot; &quot;9606.ENSP00000411010&quot;
+## [25] &quot;9606.ENSP00000373905&quot; &quot;9606.ENSP00000449328&quot; &quot;9606.ENSP00000372191&quot;
+## [28] &quot;9606.ENSP00000392318&quot; &quot;9606.ENSP00000476295&quot; &quot;9606.ENSP00000483484&quot;</code></pre>
+<hr />
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-programming-for-bioinformatics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

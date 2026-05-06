@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Analyzing Biological Networks | BioNetR_Ignite.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Analyzing Biological Networks | BioNetR_Ignite.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Analyzing Biological Networks | BioNetR_Ignite.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-graph-theory.html"/>
+<link rel="next" href="r-programming-for-bioinformatics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
+<script src="libs/vis-9.1.0/vis-network.min.js"></script>
+<script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Cover</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html"><i class="fa fa-check"></i><b>1</b> Understanding Biological Networks</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#what-is-a-network"><i class="fa fa-check"></i><b>1.1</b> What is a Network?</a></li>
+<li class="chapter" data-level="1.2" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#biological-networks"><i class="fa fa-check"></i><b>1.2</b> Biological Networks</a></li>
+<li class="chapter" data-level="1.3" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#types-of-biological-networks"><i class="fa fa-check"></i><b>1.3</b> Types of Biological Networks</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#gene-regulatory-networks-grn"><i class="fa fa-check"></i><b>1.3.1</b> Gene Regulatory Networks (GRN)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#protein-protein-interaction-ppi"><i class="fa fa-check"></i><b>1.3.2</b> Protein-Protein Interaction (PPI)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#complexity-in-biological-networks"><i class="fa fa-check"></i><b>1.4</b> Complexity in Biological Networks</a></li>
+<li class="chapter" data-level="1.5" data-path="understanding-biological-networks.html"><a href="understanding-biological-networks.html#suggested-figures"><i class="fa fa-check"></i><b>1.5</b> 📌 Suggested Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html"><i class="fa fa-check"></i><b>2</b> Introduction to Graph Theory</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#mathematical-representation-of-graph-network"><i class="fa fa-check"></i><b>2.1</b> Mathematical Representation of Graph (Network)</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#history-of-graph-theory"><i class="fa fa-check"></i><b>2.2</b> History of Graph Theory</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#from-puzzle-to-principle"><i class="fa fa-check"></i><b>2.2.1</b> From Puzzle to Principle</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#from-bridges-to-biology"><i class="fa fa-check"></i><b>2.3</b> From Bridges to Biology</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#take-home-message"><i class="fa fa-check"></i><b>2.4</b> Take-Home Message</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#types-of-networks"><i class="fa fa-check"></i><b>2.5</b> Types of Networks</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#mathematical-representation-of-networks"><i class="fa fa-check"></i><b>2.6</b> Mathematical representation of networks</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#network-metrics"><i class="fa fa-check"></i><b>2.7</b> Network Metrics</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#degree"><i class="fa fa-check"></i><b>2.7.1</b> Degree</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#betweenness"><i class="fa fa-check"></i><b>2.7.2</b> Betweenness</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#closeness"><i class="fa fa-check"></i><b>2.7.3</b> Closeness</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#minimum-dominating-set-mds"><i class="fa fa-check"></i><b>2.8</b> Minimum Dominating Set (MDS)</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction-to-graph-theory.html"><a href="introduction-to-graph-theory.html#suggested-figures-1"><i class="fa fa-check"></i><b>2.9</b> 📌 Suggested Figures</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html"><i class="fa fa-check"></i><b>3</b> Analyzing Biological Networks</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#bioinformatics-resources"><i class="fa fa-check"></i><b>3.1</b> Bioinformatics Resources</a></li>
+<li class="chapter" data-level="3.2" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#string-database"><i class="fa fa-check"></i><b>3.2</b> STRING Database</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#key-features"><i class="fa fa-check"></i><b>3.2.1</b> Key Features</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#example-ppi-network-analysis-tp53"><i class="fa fa-check"></i><b>3.3</b> Example: PPI Network Analysis (TP53)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#step-1-network-construction"><i class="fa fa-check"></i><b>3.3.1</b> Step 1: Network Construction</a></li>
+<li class="chapter" data-level="3.3.2" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#step-2-increase-network-connectivity"><i class="fa fa-check"></i><b>3.3.2</b> Step 2: Increase Network Connectivity</a></li>
+<li class="chapter" data-level="3.3.3" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#infographic-1-string-workflow"><i class="fa fa-check"></i><b>3.3.3</b> Infographic 1: STRING Workflow</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="analyzing-biological-networks.html"><a href="analyzing-biological-networks.html#summary"><i class="fa fa-check"></i><b>3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html"><i class="fa fa-check"></i><b>4</b> R Programming for Bioinformatics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#why-r"><i class="fa fa-check"></i><b>4.1</b> Why R?</a></li>
+<li class="chapter" data-level="4.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#rstudio-environment"><i class="fa fa-check"></i><b>4.2</b> RStudio Environment</a></li>
+<li class="chapter" data-level="4.3" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#basic-syntax"><i class="fa fa-check"></i><b>4.3</b> Basic Syntax</a></li>
+<li class="chapter" data-level="4.4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#working-with-biological-data"><i class="fa fa-check"></i><b>4.4</b> Working with Biological Data</a></li>
+<li class="chapter" data-level="4.5" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-structures-in-r"><i class="fa fa-check"></i><b>4.5</b> Data Structures in R</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#vector"><i class="fa fa-check"></i><b>4.5.1</b> Vector</a></li>
+<li class="chapter" data-level="4.5.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#matrix"><i class="fa fa-check"></i><b>4.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="4.5.3" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#list"><i class="fa fa-check"></i><b>4.5.3</b> List</a></li>
+<li class="chapter" data-level="4.5.4" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-frame"><i class="fa fa-check"></i><b>4.5.4</b> Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#importing-data"><i class="fa fa-check"></i><b>4.6</b> Importing Data</a></li>
+<li class="chapter" data-level="4.7" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#data-manipulation"><i class="fa fa-check"></i><b>4.7</b> Data Manipulation</a></li>
+<li class="chapter" data-level="4.8" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#control-structures"><i class="fa fa-check"></i><b>4.8</b> Control Structures</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#if-else"><i class="fa fa-check"></i><b>4.8.1</b> If-Else</a></li>
+<li class="chapter" data-level="4.8.2" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#loop"><i class="fa fa-check"></i><b>4.8.2</b> Loop</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#apply-functions"><i class="fa fa-check"></i><b>4.9</b> Apply Functions</a></li>
+<li class="chapter" data-level="4.10" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#basic-statistics"><i class="fa fa-check"></i><b>4.10</b> Basic Statistics</a></li>
+<li class="chapter" data-level="4.11" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#visualization"><i class="fa fa-check"></i><b>4.11</b> Visualization</a></li>
+<li class="chapter" data-level="4.12" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#boxplot-visualization"><i class="fa fa-check"></i><b>4.12</b> Boxplot Visualization</a></li>
+<li class="chapter" data-level="4.13" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#biological-example-comparing-gene-expression"><i class="fa fa-check"></i><b>4.13</b> Biological Example: Comparing Gene Expression</a></li>
+<li class="chapter" data-level="4.14" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#visualization-of-comparison"><i class="fa fa-check"></i><b>4.14</b> Visualization of Comparison</a></li>
+<li class="chapter" data-level="4.15" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#saving-output"><i class="fa fa-check"></i><b>4.15</b> Saving Output</a></li>
+<li class="chapter" data-level="4.16" data-path="r-programming-for-bioinformatics.html"><a href="r-programming-for-bioinformatics.html#summary-1"><i class="fa fa-check"></i><b>4.16</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html"><i class="fa fa-check"></i><b>5</b> From Genes to Networks</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#starting-with-a-simple-network"><i class="fa fa-check"></i><b>5.1</b> Starting with a Simple Network</a></li>
+<li class="chapter" data-level="5.2" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#moving-to-real-biological-data"><i class="fa fa-check"></i><b>5.2</b> Moving to Real Biological Data</a></li>
+<li class="chapter" data-level="5.3" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#expanding-into-a-large-network"><i class="fa fa-check"></i><b>5.3</b> Expanding into a Large Network</a></li>
+<li class="chapter" data-level="5.4" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#visualizing-the-network"><i class="fa fa-check"></i><b>5.4</b> Visualizing the Network</a></li>
+<li class="chapter" data-level="5.5" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#understanding-network-structure"><i class="fa fa-check"></i><b>5.5</b> Understanding Network Structure</a></li>
+<li class="chapter" data-level="5.6" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#highlighting-important-genes"><i class="fa fa-check"></i><b>5.6</b> Highlighting Important Genes</a></li>
+<li class="chapter" data-level="5.7" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#detecting-functional-modules"><i class="fa fa-check"></i><b>5.7</b> Detecting Functional Modules</a></li>
+<li class="chapter" data-level="5.8" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#interactive-network-exploration"><i class="fa fa-check"></i><b>5.8</b> Interactive Network Exploration</a></li>
+<li class="chapter" data-level="5.9" data-path="from-genes-to-networks.html"><a href="from-genes-to-networks.html#identifying-hub-genes"><i class="fa fa-check"></i><b>5.9</b> Identifying Hub Genes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#future-directions"><i class="fa fa-check"></i><b>6.1</b> Future Directions</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analyzing-biological-networks" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Analyzing Biological Networks<a href="analyzing-biological-networks.html#analyzing-biological-networks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="bioinformatics-resources" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Bioinformatics Resources<a href="analyzing-biological-networks.html#bioinformatics-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many bioinformatics resources for constructing biological networks. There are databases and sources such as STRING, IntAct, etc. for the networks information extraction, visualization and even analysis. However, a proper and deeper analysis needs tools such as Cytoscape and Gephi. Cytoscape is the most widely used network visualization and analysis tools in the field of biology.</p>
+<hr />
+</div>
+<div id="string-database" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> STRING Database<a href="analyzing-biological-networks.html#string-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The STRING database integrates known and predicted protein–protein interactions derived from experimental data, computational prediction, and literature mining.</p>
+<div id="key-features" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Key Features<a href="analyzing-biological-networks.html#key-features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Interaction confidence scoring</li>
+<li>Multiple evidence channels (experimental, text mining, co-expression)</li>
+<li>Adjustable network parameters</li>
+<li>Export support for Cytoscape</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="example-ppi-network-analysis-tp53" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Example: PPI Network Analysis (TP53)<a href="analyzing-biological-networks.html#example-ppi-network-analysis-tp53" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="step-1-network-construction" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Step 1: Network Construction<a href="analyzing-biological-networks.html#step-1-network-construction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Navigate to STRING database</li>
+<li>Enter <strong>TP53</strong></li>
+<li>Select organism: <em>Homo sapiens</em></li>
+<li>Click <strong>Search</strong> to generate the network</li>
+</ul>
+<hr />
+</div>
+<div id="step-2-increase-network-connectivity" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Step 2: Increase Network Connectivity<a href="analyzing-biological-networks.html#step-2-increase-network-connectivity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To obtain a denser and more informative network:</p>
+<ul>
+<li><p>Increase <strong>number of interactors</strong> (e.g., 50–100)</p></li>
+<li><p>Reduce <strong>confidence score threshold</strong> (e.g., 0.7 → 0.4)</p></li>
+<li><p>Enable additional interaction sources:</p>
+<ul>
+<li>Text mining</li>
+<li>Co-expression</li>
+<li>Database evidence</li>
+</ul></li>
+<li><p>Use <strong>“Add more interactors”</strong> option</p></li>
+</ul>
+<hr />
+</div>
+<div id="infographic-1-string-workflow" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Infographic 1: STRING Workflow<a href="analyzing-biological-networks.html#infographic-1-string-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="img/stringNetAnalysis.png" /></p>
+<hr />
+</div>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Summary<a href="analyzing-biological-networks.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This workflow demonstrates how to construct, import, analyze, and visualize protein–protein interaction networks using STRING and Cytoscape. By adjusting parameters in STRING and leveraging Cytoscape’s analytical tools, biologically meaningful insights can be derived efficiently.</p>
+<hr />
+<hr />
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-graph-theory.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-programming-for-bioinformatics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
